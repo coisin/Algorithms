@@ -1,6 +1,6 @@
 /*
 
-Tarjan's Algorithm for finding Strongly Connected Components
+Articulation Points And Bridges
 
 */
 
