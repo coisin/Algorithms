@@ -25,6 +25,19 @@ public:
   int mrq(int i, int j) {
     return mrq(1, 0, _n, i, j);
   }
+  void updateRange(int p, int L, int R, int i, int j, int val) {
+    if(L > j || R < i) return;
+    if(L == R) {
+      A[st[p]] += val;
+      return;
+    }
+    updateRange(left(p), L, (L + R) / 2, i, j, val);
+    updateRange(right(p), (L + R) / 2 + 1, R, i, j, val);
+    st[p] = operation(st[left(p)], st[right(p)]);
+  }
+  void updateRange(int i, int j, int val) {
+    updateRange(1, 0, _n, i, j, val);
+  }
   void build(int p, int L, int R) {
     if(L == R) {
       st[p] = L;
@@ -44,7 +57,7 @@ public:
 
 int main() {
 
-  int _A[] = {1, 7, 3, 87, 34, 6, 42,2, 43, -5};
+  int _A[] = {1, 7, 3, 87, 34, 6, 42,2, 43, 500};
   vector<int> A(_A, _A + 10);
 
   SegmentTree st(10, A);
@@ -52,6 +65,8 @@ int main() {
   cout << st.mrq(3, 5) << endl;
   cout << st.mrq(5, 6) << endl;
   cout << st.mrq(5, 5) << endl;
+  cout << st.mrq(1, 10) << endl;
+  st.updateRange(8, 10, -1000);
   cout << st.mrq(1, 10) << endl;
 
   return 0;
