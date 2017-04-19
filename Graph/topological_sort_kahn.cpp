@@ -9,12 +9,12 @@ vector<vector<int> > adjList;
 vector<int> topological_sort;
 
 void kahns(int u) {
-  vector<int> degree(num_vertices 0);
+  vector<int> degree(num_vertices, 0);
   queue<int> q;
-  for(int i = 0; i < n; i++)
+  for(int i = 0; i < num_vertices; i++)
   	for(int n : adjList[i])
   		degree[n]++;
-  for(int i = 0; i < n; i++)
+  for(int i = 0; i < num_vertices; i++)
   	if(degree[i] == 0)
   		q.push(i);
   while(!q.empty()) {
