@@ -9,12 +9,12 @@ vector<int> dist;
 void dijkstra(int source) {
   priority_queue<pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > pq;
   dist[source] = 0;
-  pq.push({ source, 0 }); // { vertex, distance }
+  pq.push({ 0, source }); // { distance vertevertex }
 
   while(!pq.empty()) {
     int u, d;
-    u = pq.top().first;
-    d = pq.top().second;
+    u = pq.top().second;
+    d = pq.top().first;
     pq.pop();
     if(d > dist[u]) continue; // Old Entry
     for(int i = 0; i < adjList[u].size(); i++) {
@@ -23,7 +23,7 @@ void dijkstra(int source) {
       l = adjList[u][i].second;
       if(dist[v] > dist[u] + l) {
         dist[v] = dist[u] + l;
-        pq.push({ v, dist[v] });
+        pq.push({ dist[v], v });
       }
     }
   }
